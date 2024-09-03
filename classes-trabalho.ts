@@ -10,7 +10,7 @@ class Funcionario extends Trabalhador
 	private salario: number;
     private cargo:string;
 	
-	public constructor(nome: string, sal: number, cargo:string)
+	public constructor(nome: string, sal: number, cargo:string='funcionario')
 	{
         super();
 		this.nome = nome;
@@ -83,3 +83,35 @@ class Gerente extends Funcionario
 
 
 // 2 e 4
+
+const ermenegildo= new Funcionario('emernegildo',200)
+ermenegildo.print()
+class listatrabalhadores{
+	private geral:Trabalhador[]
+	public constructor(lista:Trabalhador[]){
+		this.geral=lista
+	}
+	public retornadoindece(index:number){
+		try{
+			return this.geral[index]
+		}
+		catch(error){
+			if (error instanceof RangeError) {
+				return []
+			}
+		}
+	}
+	public insere(valor:Trabalhador[]):void{
+		valor.forEach((element) => this.geral.push(element));																				
+	}
+	public getgeral():Trabalhador[]{
+		return this.geral
+	}
+}
+const mcdonalds= new listatrabalhadores([new Gerente('Sasuke','UM pai irresponsavel e ausente',17000)])
+mcdonalds.insere([new Atendente('roxy',69,1),
+new Atendente('rudeus',24,1),
+new Atendente('hinata',69,1),
+new Assistente('Sarada' , new Funcionario('Sarada',0),0),
+new Assistente('Sakura', new Funcionario('Sakura',0),0)])
+console.log(mcdonalds.getgeral())
